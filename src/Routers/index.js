@@ -13,6 +13,7 @@ export default function Routers() {
         <Routes>
             <Route path="/" element={<Registration />} exact />
             <Route path="/login" element={<Login />} exact />
+            <Route path="/registration" element={<Registration />} exact />
             <Route path="/home" element={<PrivateRoutes><HomePage /></PrivateRoutes>} exact />
         </Routes>
     )

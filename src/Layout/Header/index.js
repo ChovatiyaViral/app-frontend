@@ -46,7 +46,6 @@ export default function Header() {
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
-                            size="large"
                             aria-label="account of current user"
                             aria-controls="menu-appbar"
                             aria-haspopup="true"
@@ -75,7 +74,7 @@ export default function Header() {
                         >
                             {pages.map((page) => (
                                 <MenuItem key={page} onClick={() => handleRedirectToPage(page)}>
-                                    <Typography textAlign="center">{page}</Typography>
+                                    <Typography >{page}</Typography>
                                 </MenuItem>
                             ))}
                         </Menu>
@@ -102,7 +101,7 @@ export default function Header() {
 
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                            <IconButton onClick={handleOpenUserMenu} >
                                 <Avatar alt="Remy " src="/static/images/avatar/2.jpg" >V</Avatar>
                             </IconButton>
                         </Tooltip>
@@ -124,7 +123,7 @@ export default function Header() {
                         >
                             {settings.map((setting) => (
                                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
+                                    <Typography >{setting}</Typography>
                                 </MenuItem>
                             ))}
                         </Menu>

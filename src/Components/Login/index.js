@@ -57,7 +57,8 @@ export default function Login() {
                 await axios.post(baseURL + '/auth/login', data)
                     .then((res) => {
                         if (res.status === 200) {
-                            localStorage.setItem("token", res.data.token)
+                            localStorage.setItem("token", res.data.token);
+                            navigate('/home');
                             handleResetData();
                         }
                     })

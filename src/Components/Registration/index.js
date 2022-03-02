@@ -58,7 +58,7 @@ export default function Registration() {
                 await axios.post(baseURL + '/auth/registration', data)
                     .then((res) => {
                         if (res.status === 200) {
-                            navigate('login');
+                            navigate('/login');
                             handleResetData();
                         }
                     })

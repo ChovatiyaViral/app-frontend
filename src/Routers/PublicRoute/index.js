@@ -1,8 +1,8 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom';
-import { auth } from '../../helper';
 
 export default function PublicRoutes(props) {
+  const auth = localStorage.getItem('token');
   return (
     <>
       {

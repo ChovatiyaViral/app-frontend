@@ -12,7 +12,7 @@ const navigetMenu = {
 }
 
 export default function Header() {
-    let navigate = useNavigate();
+    const navigate = useNavigate();
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 

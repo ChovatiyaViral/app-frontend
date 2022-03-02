@@ -1,7 +1,89 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { TextField, makeStyles, Button } from '@material-ui/core'
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { baseURL } from '../../helper';
 
-export default function Logins() {
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: theme.spacing(2),
+        '& .MuiTextField-root': {
+            margin: theme.spacing(1),
+            width: '300px',
+        },
+        '& .MuiButtonBase-root': {
+            margin: theme.spacing(2),
+        },
+    },
+}));
+
+export default function Login() {
+    const navigate = useNavigate();
+    const classes = useStyles();
+
+    const [data, setData] = useState({
+        email: '',
+        password: '',
+    })
+
+    const handleRedirctToLogin = () => {
+        navigate('/registration')
+    }
+
+
+    const handleChange = (e) => {
+        setData({
+            ...data,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const handleResetData = () => {
+        setData({
+            email: '',
+            password: '',
+        })
+    }
+
+    const handleLogin = async () => {
+        if (data.email && data.password) {
+            try {
+                await axios.post(baseURL + '/auth/login', data)
+                    .then((res) => {
+                        if (res.status === 200) {
+                            localStorage.setItem("token", res.data.token)
+                            handleResetData();
+                        }
+                    })
+
+            } catch (error) {
+                console.log("err", error);
+            }
+        }
+    }
+
     return (
-        <div>Logins</div>
+        <form className={classes.root}>
+            <h1>Login</h1>
+            <TextField label="Email" variant="filled" type="email" name="email" value={data.email} required onChange={handleChange} />
+            <TextField label="Password" variant="filled" type="password" name="password" value={data.password} required onChange={handleChange} />
+            <div>
+                <Button type="button" variant="contained" onClick={handleResetData}>
+                    Cancel
+                </Button>
+                <Button type="button" variant="contained" color="primary" onClick={handleRedirctToLogin}>
+                    SignUp
+                </Button>
+                <Button type="button" variant="contained" color="primary" onClick={handleLogin}>
+                    Login
+                </Button>
+            </div>
+        </form>
     )
 }

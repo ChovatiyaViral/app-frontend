@@ -1,15 +1,15 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom';
+import { auth } from '../../helper';
 
 export default function PublicRoutes(props) {
-  let auth = true;
   return (
     <>
       {
-        auth ?
+        !auth ?
           props.children
           :
-          <Navigate to='/login' />
+          <Navigate to='/home' />
       }
     </>
   )

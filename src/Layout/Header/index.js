@@ -3,11 +3,13 @@ import { AppBar, Avatar, Box, Button, Container, IconButton, Menu, MenuItem, Too
 import MenuIcon from '@material-ui/icons/Menu';
 import { useNavigate } from 'react-router-dom';
 
-const pages = ['Registration', 'Logout', 'homePage'];
+const pages = ['Registration', 'Logout', 'homePage', 'Party Events', 'Register Party Event'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 const navigetMenu = {
     'Registration': '/registration',
     'homePage': '/home',
+    'Party Events': '/party-event',
+    'Register Party Event': '/event-register'
 }
 
 export default function Header() {

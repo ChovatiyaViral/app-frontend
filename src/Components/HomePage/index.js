@@ -1,11 +1,12 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { auth, baseURL } from '../../helper'
+import { baseURL } from '../../helper'
 import Layout from '../../Layout'
 
 export default function HomePage() {
 
     const [eventData, setEventData] = useState([]);
+    const auth = localStorage.getItem('token')
 
     useEffect(() => {
         fetchEventData()

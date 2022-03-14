@@ -32,6 +32,7 @@ export default function Events() {
         }
     }
 
+    console.log("eventData",eventData);
     return (
         <Layout>
             {

@@ -29,12 +29,12 @@ export default function PartyEventRegister() {
     const navigate = useNavigate();
 
     const [partyEventData, setPartyEventData] = useState({
-        // poster_img: "",
+        poster_img: "",
         event_name: "",
         state: "",
         date: "",
         logo: "",
-        // company_logo: "",
+        company_logo: "",
         company_name: "",
         sponsor: ""
     })
@@ -58,17 +58,17 @@ export default function PartyEventRegister() {
 
     const handleResetData = () => {
         setPartyEventData({
-            // poster_img: "",
+            poster_img: "",
             event_name: "",
             state: "",
             date: "",
             logo: "",
-            // company_logo: "",
+            company_logo: "",
             company_name: "",
             sponsor: ""
         })
     }
-    console.log("partyEventData", partyEventData);
+    
     const handleSubmit = async () => {
         var formData = new FormData();
         if (partyEventData.event_name && partyEventData.state && partyEventData.date && partyEventData.company_name && partyEventData.sponsor) {
@@ -78,6 +78,8 @@ export default function PartyEventRegister() {
             formData.append("date", partyEventData.date);
             formData.append("company_name", partyEventData.company_name);
             formData.append("sponsor", partyEventData.sponsor);
+            formData.append("company_logo", partyEventData.company_logo);
+            formData.append("poster_img", partyEventData.poster_img);
             try {
                 await axios.post(baseURL + '/partyEvents', formData, {
                     headers: {
@@ -135,7 +137,7 @@ export default function PartyEventRegister() {
                     variant="standard"
                     onChange={handleChange}
                 />
-                {/* <div style={{ display: 'inline-grid' }}>
+                <div style={{ display: 'inline-grid' }}>
                     <label>Company Logo</label>
                     <TextField
                         required
@@ -146,7 +148,7 @@ export default function PartyEventRegister() {
                         type="file"
                         variant="standard"
                     />
-                </div> */}
+                </div>
                 <TextField
                     required
                     id="standard-required"
@@ -179,7 +181,7 @@ export default function PartyEventRegister() {
                 />
 
 
-                {/* <div style={{ display: 'inline-grid' }}>
+                <div style={{ display: 'inline-grid' }}>
                     <label>Poster Image</label>
                     <TextField
                         required
@@ -190,7 +192,7 @@ export default function PartyEventRegister() {
                         onChange={handleImageChange}
                         variant="standard"
                     />
-                </div> */}
+                </div>
                 <div className={classes.buttons}>
                     <Button type="button" variant="contained">
                         Cancel

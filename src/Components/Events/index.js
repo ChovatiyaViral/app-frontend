@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import Layout from '../../Layout'
 import axios from 'axios';
-import { baseURL } from '../../helper';
+import { baseURL, isAuthentication } from '../../helper';
 
 export default function Events() {
 
     const [eventData, setEventData] = useState([]);
-    const auth = localStorage.getItem('token')
 
     useEffect(() => {
         fetchEventData()
     }, []);
 
     const fetchEventData = async () => {
-        if (auth) {
+        if (isAuthentication()) {
             try {
                 await axios.get(baseURL + '/partyEvents', {
                     headers: {
-                        'x-access-token': `${auth}`,
+                        'x-access-token': `${isAuthentication()}`,
                     }
                 })
                     .then((res) => {
@@ -32,7 +31,6 @@ export default function Events() {
         }
     }
 
-    console.log("eventData",eventData);
     return (
         <Layout>
             {

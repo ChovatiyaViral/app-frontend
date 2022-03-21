@@ -1,13 +1,13 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom'
+import { isAuthentication } from '../../helper'
 
 
 export default function PrivateRoutes(props) {
-    const auth = localStorage.getItem('token');
     return (
         <>
             {
-                auth ?
+                isAuthentication() ?
                     props.children
                     :
                     <Navigate to='/login' />
@@ -15,17 +15,3 @@ export default function PrivateRoutes(props) {
         </>
     )
 }
-
-
-// export default function PrivateRoutes({ component: Component, ...rest }) {
-//     let auth = true;
-//     return (
-//         <Route
-//             {...rest}
-//             render={props => (auth
-//                 ? <Component {...props} />
-//                 : <Navigate to="/login" />)
-//             }
-//         />
-//     )
-// }

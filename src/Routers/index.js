@@ -16,7 +16,7 @@ export default function Routers() {
         <Routes>
             <Route path="/" element={<HomePage />} exact />
             <Route path="/login" element={<PublicRoutes><Login /></PublicRoutes>} exact />
-            <Route path="/registration" element={<Registration />} exact />
+            <Route path="/registration" element={<PublicRoutes><Registration /></PublicRoutes>} exact />
             <Route path="/home" element={<PrivateRoutes><HomePage /></PrivateRoutes>} exact />
             <Route path="/party-event" element={<PrivateRoutes><Events /></PrivateRoutes>} exact />
             <Route path="/event-register" element={<PrivateRoutes><PartyEventRegister /></PrivateRoutes>} exact />

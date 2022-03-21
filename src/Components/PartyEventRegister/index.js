@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { makeStyles, TextField, Button } from '@material-ui/core'
 import Layout from '../../Layout'
 import axios from 'axios';
-import { baseURL } from '../../helper';
+import { baseURL, isAuthentication } from '../../helper';
 import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
@@ -40,7 +40,6 @@ export default function PartyEventRegister() {
     })
 
     const classes = useStyles();
-    const auth = localStorage.getItem('token')
 
     const handleChange = (e) => {
         setPartyEventData({
@@ -83,7 +82,7 @@ export default function PartyEventRegister() {
             try {
                 await axios.post(baseURL + '/partyEvents', formData, {
                     headers: {
-                        'x-access-token': `${auth}`,
+                        'x-access-token': `${isAuthentication()}`,
                         "content_type": "application/json"
                     }
                 })

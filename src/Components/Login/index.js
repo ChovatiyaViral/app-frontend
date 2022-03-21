@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { TextField, makeStyles, Button } from '@material-ui/core'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { baseURL } from '../../helper';
+import { baseURL, setToken } from '../../helper';
 
 
 const useStyles = makeStyles(theme => ({
@@ -57,7 +57,7 @@ export default function Login() {
                 await axios.post(baseURL + '/auth/login', data)
                     .then((res) => {
                         if (res.status === 200) {
-                            localStorage.setItem("token", res.data.token);
+                            setToken(res.data.token)
                             navigate('/home');
                             handleResetData();
                         }

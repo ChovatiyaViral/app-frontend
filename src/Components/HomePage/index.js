@@ -1,23 +1,22 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { baseURL } from '../../helper'
+import { baseURL, isAuthentication } from '../../helper'
 import Layout from '../../Layout'
 
 export default function HomePage() {
 
     const [eventData, setEventData] = useState([]);
-    const auth = localStorage.getItem('token')
 
     useEffect(() => {
         fetchEventData()
     }, [])
 
     const fetchEventData = async () => {
-        if (auth) {
+        if (isAuthentication()) {
             try {
                 await axios.get(baseURL + '/event', {
                     headers: {
-                        'x-access-token': `${auth}`,
+                        'x-access-token': `${isAuthentication()}`,
                     }
                 })
                     .then((res) => {
@@ -37,7 +36,7 @@ export default function HomePage() {
             try {
                 await axios.delete(baseURL + `/event/delete/${id}`, {
                     headers: {
-                        'x-access-token': `${auth}`,
+                        'x-access-token': `${isAuthentication()}`,
                     }
                 })
                     .then((res) => {

@@ -2,9 +2,22 @@ import React, { useEffect, useState } from 'react'
 import Layout from '../../Layout'
 import axios from 'axios';
 import { baseURL, isAuthentication } from '../../helper';
+import EventBox from './EventBox';
+import { makeStyles } from '@material-ui/core';
+
+const useStyles = makeStyles(theme => ({
+    eventSection :{
+        display:'flex',
+        flexWrap:'wrap',
+        justifyContent:'flex-start',
+        gap:25,
+        marginTop:'20px',
+        padding:'50px'
+    }
+}));
 
 export default function Events() {
-
+    const classes = useStyles();
     const [eventData, setEventData] = useState([]);
 
     useEffect(() => {
@@ -33,21 +46,21 @@ export default function Events() {
 
     return (
         <Layout>
-            {
-                eventData && eventData.length ?
-                    <>
-                        {
-                            eventData.map((item, index) => {
-                                return (
-                                    <div key={index}>
-                                        <img src={item.logo} alt="logo image" />
-                                    </div>
-                                )
-                            })
-                        }
-                    </>
-                    : null
-            }
+            <div className={classes.eventSection}>
+                {
+                    eventData && eventData.length ?
+                        <>
+                            {
+                                eventData.map((item, index) => {
+                                    return (
+                                        <EventBox data={item} key={index} />
+                                    )
+                                })
+                            }
+                        </>
+                        : null
+                }
+            </div>
         </Layout>
     )
 }

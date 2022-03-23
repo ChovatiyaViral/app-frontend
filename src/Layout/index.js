@@ -6,7 +6,8 @@ import { makeStyles } from '@material-ui/core';
 const useStyles = makeStyles({
     layoutDiv: {
         paddingTop:'64px',
-        height:'calc(100vh - 115px)'
+        height:'calc(100vh - 115px)',
+        overflow:'auto'
     }
 })
 

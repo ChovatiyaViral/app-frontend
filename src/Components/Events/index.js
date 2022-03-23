@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import Layout from '../../Layout'
-import axios from 'axios';
-import { baseURL, isAuthentication } from '../../helper';
 import EventBox from './EventBox';
 import { makeStyles } from '@material-ui/core';
+import { ApiGet } from '../../apiHelper';
 
 const useStyles = makeStyles(theme => ({
-    eventSection :{
-        display:'flex',
-        flexWrap:'wrap',
-        justifyContent:'flex-start',
-        gap:25,
-        marginTop:'20px',
-        padding:'50px'
+    eventSection: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'flex-start',
+        gap: 25,
+        marginTop: '20px',
+        padding: '50px'
     }
 }));
 
@@ -21,26 +20,20 @@ export default function Events() {
     const [eventData, setEventData] = useState([]);
 
     useEffect(() => {
-        fetchEventData()
+        fetchEventData();
     }, []);
 
     const fetchEventData = async () => {
-        if (isAuthentication()) {
-            try {
-                await axios.get(baseURL + '/partyEvents', {
-                    headers: {
-                        'x-access-token': `${isAuthentication()}`,
+        try {
+            await ApiGet('/partyEvents')
+                .then((res) => {
+                    if (res.status === 200) {
+                        setEventData(res.data)
                     }
                 })
-                    .then((res) => {
-                        if (res.status === 200) {
-                            setEventData(res.data)
-                        }
-                    })
 
-            } catch (error) {
-                console.log("err", error);
-            }
+        } catch (error) {
+            console.log("err", error);
         }
     }
 

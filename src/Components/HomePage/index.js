@@ -1,6 +1,5 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { baseURL, isAuthentication } from '../../helper'
+import { ApiDelete, ApiGet } from '../../apiHelper';
 import Layout from '../../Layout'
 
 export default function HomePage() {
@@ -12,33 +11,23 @@ export default function HomePage() {
     }, [])
 
     const fetchEventData = async () => {
-        if (isAuthentication()) {
-            try {
-                await axios.get(baseURL + '/event', {
-                    headers: {
-                        'x-access-token': `${isAuthentication()}`,
+        try {
+            await ApiGet('/event')
+                .then((res) => {
+                    if (res.status === 200) {
+                        setEventData(res.data)
                     }
                 })
-                    .then((res) => {
-                        if (res.status === 200) {
-                            setEventData(res.data)
-                        }
-                    })
 
-            } catch (error) {
-                console.log("err", error);
-            }
+        } catch (error) {
+            console.log("err", error);
         }
     }
 
     const handleDeleteEvent = async (id) => {
         if (id) {
             try {
-                await axios.delete(baseURL + `/event/delete/${id}`, {
-                    headers: {
-                        'x-access-token': `${isAuthentication()}`,
-                    }
-                })
+                await ApiDelete(`/event/delete/${id}`)
                     .then((res) => {
                         if (res.status === 200) {
                             setEventData([...res.data])

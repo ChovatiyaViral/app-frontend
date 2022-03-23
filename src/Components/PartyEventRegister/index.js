@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { makeStyles, TextField, Button } from '@material-ui/core'
 import Layout from '../../Layout'
-import axios from 'axios';
-import { baseURL, isAuthentication } from '../../helper';
 import { useNavigate } from 'react-router-dom';
+import { ApiPost } from '../../apiHelper';
 
 const useStyles = makeStyles(theme => ({
     eventForm: {
@@ -67,7 +66,7 @@ export default function PartyEventRegister() {
             sponsor: ""
         })
     }
-    
+
     const handleSubmit = async () => {
         var formData = new FormData();
         if (partyEventData.event_name && partyEventData.state && partyEventData.date && partyEventData.company_name && partyEventData.sponsor) {
@@ -80,12 +79,7 @@ export default function PartyEventRegister() {
             formData.append("company_logo", partyEventData.company_logo);
             formData.append("poster_img", partyEventData.poster_img);
             try {
-                await axios.post(baseURL + '/partyEvents', formData, {
-                    headers: {
-                        'x-access-token': `${isAuthentication()}`,
-                        "content_type": "application/json"
-                    }
-                })
+                await ApiPost('/partyEvents', formData)
                     .then((res) => {
                         if (res.status === 200) {
                             navigate('/party-event');

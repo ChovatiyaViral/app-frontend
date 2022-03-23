@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { TextField, makeStyles, Button } from '@material-ui/core'
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { baseURL, setToken } from '../../helper';
+import { setToken } from '../../helper';
+import { ApiPostNoAuth } from '../../apiHelper';
 
 
 const useStyles = makeStyles(theme => ({
@@ -54,7 +54,7 @@ export default function Login() {
     const handleLogin = async () => {
         if (data.email && data.password) {
             try {
-                await axios.post(baseURL + '/auth/login', data)
+                await ApiPostNoAuth('/auth/login', data)
                     .then((res) => {
                         if (res.status === 200) {
                             setToken(res.data.token)
@@ -68,6 +68,7 @@ export default function Login() {
             }
         }
     }
+
 
     return (
         <form className={classes.root}>

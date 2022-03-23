@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { TextField, makeStyles, Button } from '@material-ui/core'
 import { useNavigate } from 'react-router-dom';
-import { baseURL } from '../../helper';
-import axios from 'axios';
+import { ApiPostNoAuth } from '../../apiHelper';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -55,7 +54,7 @@ export default function Registration() {
     const handleRegistartion = async () => {
         if (data.first_name && data.email && data.password) {
             try {
-                await axios.post(baseURL + '/auth/registration', data)
+                await ApiPostNoAuth('/auth/registration', data)
                     .then((res) => {
                         if (res.status === 200) {
                             navigate('/login');

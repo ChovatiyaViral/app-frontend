@@ -3,6 +3,7 @@ import { TextField, makeStyles, Button } from '@material-ui/core'
 import { useNavigate } from 'react-router-dom';
 import { setToken } from '../../helper';
 import { ApiPostNoAuth } from '../../apiHelper';
+import { toast } from 'react-toastify';
 
 
 const useStyles = makeStyles(theme => ({
@@ -24,6 +25,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Login() {
+    toast.configure();
     const navigate = useNavigate();
     const classes = useStyles();
 
@@ -57,6 +59,7 @@ export default function Login() {
                 await ApiPostNoAuth('/auth/login', data)
                     .then((res) => {
                         if (res.status === 200) {
+                            toast.success("User Login Successfully")
                             setToken(res.data.token)
                             navigate('/home');
                             handleResetData();
@@ -64,7 +67,7 @@ export default function Login() {
                     })
 
             } catch (error) {
-                console.log("err", error);
+                toast.error(error)
             }
         }
     }

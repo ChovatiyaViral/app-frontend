@@ -79,9 +79,9 @@ export const ApiPostNoAuth = (type, userData) => {
     });
 }
 
-export const ApiPost = (type, userData) => {
+export const ApiPost = (type, data) => {
     return new Promise((resolve, reject) => {
-        axios.post(baseURL + type, userData, getHttpOptions())
+        axios.post(baseURL + type, data, getHttpOptions())
             .then((responseJson) => {
                 resolve(responseJson);
             })

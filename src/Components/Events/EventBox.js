@@ -1,6 +1,8 @@
 import React from 'react'
 import FackImg from '../../assets/images/fack_img.jpg'
 import { makeStyles } from '@material-ui/core';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 
 const useStyles = makeStyles(theme => ({
@@ -67,11 +69,12 @@ const useStyles = makeStyles(theme => ({
     brandBox: {
         display: 'flex',
         alignItems: 'center',
-        marginTop: '10px',
+        marginRight: 'auto',
 
         '& h6': {
             margin: '0px',
-            fontSize: '12px'
+            fontSize: '12px',
+            paddingRight: '5px'
         }
     },
 
@@ -87,10 +90,21 @@ const useStyles = makeStyles(theme => ({
             height: '100%',
             objectFit: 'cover'
         }
+    },
+
+    organizerBox: {
+        display: 'flex',
+        marginTop: '10px',
+        alignItems: 'center',
+
+        '& svg': {
+            fill: 'red',
+            cursor: 'pointer'
+        }
     }
 }));
 
-export default function EventBox({ data }) {
+export default function EventBox({ data, handleLikeDisLike }) {
     const classes = useStyles();
     return (
         <div className={classes.eventBox}>
@@ -100,11 +114,19 @@ export default function EventBox({ data }) {
             <div className={classes.contentSection}>
                 <h1>{data.event_name}</h1>
                 <h5>{data.state}<span>{data.date}</span></h5>
-                <div className={classes.brandBox}>
-                    <div className={classes.userLogo}>
-                        <img src={data.logo} alt="user logo" />
+                <div className={classes.organizerBox}>
+                    <div className={classes.brandBox}>
+                        <div className={classes.userLogo}>
+                            <img src={data.logo} alt="user logo" />
+                        </div>
+                        <h6>{data.company_name}</h6>
                     </div>
-                    <h6>{data.company_name}</h6>
+                    {
+                        data.is_like ?
+                            <FavoriteIcon onClick={() => handleLikeDisLike(data._id, data.is_like)} />
+                            :
+                            <FavoriteBorderIcon onClick={() => handleLikeDisLike(data._id, data.is_like)} />
+                    }
                 </div>
             </div>
         </div>

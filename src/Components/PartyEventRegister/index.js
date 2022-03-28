@@ -35,7 +35,8 @@ export default function PartyEventRegister() {
         logo: "",
         company_logo: "",
         company_name: "",
-        sponsor: ""
+        sponsor: "",
+        is_like: false
     })
 
     const classes = useStyles();
@@ -78,6 +79,7 @@ export default function PartyEventRegister() {
             formData.append("sponsor", partyEventData.sponsor);
             formData.append("company_logo", partyEventData.company_logo);
             formData.append("poster_img", partyEventData.poster_img);
+            formData.append("is_like", false);
             try {
                 await ApiPost('/partyEvents', formData)
                     .then((res) => {

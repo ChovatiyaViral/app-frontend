@@ -64,8 +64,6 @@ export default function Registration() {
 
             } catch (error) {
                 console.log("err", error);
-                localStorage.clear();
-                navigate('/logon')
             }
         }
     }

@@ -14,7 +14,7 @@ import PartyEventRegister from '../Components/PartyEventRegister';
 export default function Routers() {
     return (
         <Routes>
-            <Route path="/" element={<HomePage />} exact />
+            <Route path="/" element={<PrivateRoutes><HomePage /></PrivateRoutes>} exact />
             <Route path="/login" element={<PublicRoutes><Login /></PublicRoutes>} exact />
             <Route path="/registration" element={<PublicRoutes><Registration /></PublicRoutes>} exact />
             <Route path="/home" element={<PrivateRoutes><HomePage /></PrivateRoutes>} exact />

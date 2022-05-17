@@ -1,5 +1,4 @@
 import React from 'react'
-import FackImg from '../../assets/images/fack_img.jpg'
 import { makeStyles } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
@@ -8,7 +7,7 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 const useStyles = makeStyles(theme => ({
     eventBox: {
         display: 'block',
-        maxWidth: '250px',
+        maxWidth: '250px',  
         width: '250px',
         minWidth: '250px',
         overflow: 'hidden',

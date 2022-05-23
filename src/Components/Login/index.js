@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { TextField, makeStyles, Button } from '@material-ui/core'
 import { useNavigate } from 'react-router-dom';
-import { setToken } from '../../helper';
+import { setFirstLetterOfUser, setToken } from '../../helper';
 import { ApiPostNoAuth } from '../../apiHelper';
 import { toast } from 'react-toastify';
 
@@ -61,6 +61,7 @@ export default function Login() {
                         if (res.status === 200) {
                             toast.success("User Login Successfully")
                             setToken(res.data.token)
+                            setFirstLetterOfUser(res.data.first_name)
                             navigate('/home');
                             handleResetData();
                         }

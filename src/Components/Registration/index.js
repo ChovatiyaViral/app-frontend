@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { TextField, makeStyles, Button } from '@material-ui/core'
 import { useNavigate } from 'react-router-dom';
 import { ApiPostNoAuth } from '../../apiHelper';
+import { toast } from 'react-toastify';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -22,6 +23,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Registration() {
+    toast.configure();
     const navigate = useNavigate();
     const classes = useStyles();
 
@@ -63,7 +65,9 @@ export default function Registration() {
                     })
 
             } catch (error) {
-                console.log("err", error);
+                console.log("error",error);
+
+                toast.error(error);
             }
         }
     }

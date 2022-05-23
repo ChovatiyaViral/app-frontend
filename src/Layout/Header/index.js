@@ -2,6 +2,7 @@ import React from 'react'
 import { AppBar, Avatar, Box, Button, Container, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { useNavigate } from 'react-router-dom';
+import { getFirstLetterOfUser } from '../../helper';
 
 const pages = ['homePage', 'Party Events', 'Register Party Event'];
 const settings = ['Logout'];
@@ -103,7 +104,7 @@ export default function Header() {
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} >
-                                <Avatar alt="Remy " src="/static/images/avatar/2.jpg" >V</Avatar>
+                                <Avatar alt="Remy " src="/static/images/avatar/2.jpg" >{getFirstLetterOfUser()}</Avatar>
                             </IconButton>
                         </Tooltip>
                         <Menu

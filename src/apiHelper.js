@@ -86,6 +86,7 @@ export const ApiPostNoAuth = (type, userData) => {
                 resolve(responseJson);
             })
             .catch((error) => {
+                console.log("ereererer",error);
                 if (error && error.hasOwnProperty('response') &&
                     error.response && error.response.hasOwnProperty('data') && error.response.data &&
                     error.response.data.hasOwnProperty('error') && error.response.data.error) {
@@ -96,7 +97,7 @@ export const ApiPostNoAuth = (type, userData) => {
                     }
                     reject(error.response.data.error);
                 } else {
-                    reject(error);
+                    reject(error.response.data);
                 }
             });
     });

@@ -3,8 +3,8 @@ import { AppBar, Avatar, Box, Button, Container, IconButton, Menu, MenuItem, Too
 import MenuIcon from '@material-ui/icons/Menu';
 import { useNavigate } from 'react-router-dom';
 
-const pages = ['homePage', 'Party Events', 'Register Party Event', 'Logout'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = ['homePage', 'Party Events', 'Register Party Event'];
+const settings = ['Logout'];
 const navigetMenu = {
     // 'Registration': '/registration',
     'homePage': '/home',
@@ -29,16 +29,15 @@ export default function Header() {
     };
 
     const handleRedirectToPage = (page) => {
-        if (page === "Logout") {
-            localStorage.clear();
-            navigate('/login')
-        } else {
-            navigate(`${navigetMenu[page]}`)
-            setAnchorElNav(null);
-        }
+        navigate(`${navigetMenu[page]}`)
+        setAnchorElNav(null);
     };
 
-    const handleCloseUserMenu = () => {
+    const handleCloseUserMenu = (name) => {
+        if (name === "Logout") {
+            localStorage.clear();
+            navigate('/login')
+        }
         setAnchorElUser(null);
     };
     return (
@@ -124,7 +123,7 @@ export default function Header() {
                             onClose={handleCloseUserMenu}
                         >
                             {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                                <MenuItem key={setting} onClick={() => handleCloseUserMenu(setting)}>
                                     <Typography >{setting}</Typography>
                                 </MenuItem>
                             ))}
